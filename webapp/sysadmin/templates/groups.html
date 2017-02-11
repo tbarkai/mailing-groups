@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mailing Groups</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type=text/javascript>
+        var expand = function() {
+            var id = $(this).attr('id');
+            var groupElem = $('#' + id);
+            var resultArea = groupElem.find('div');
+            if (resultArea.children().length > 0) {
+                return;
+            }
+            $.ajax({
+                url: '/mailinggroups/' + id + '/members',
+                dataType: 'html',
+                method: 'GET',
+                success: function(data) {
+                    groupElem.find('span').removeClass('clickable');
+                    resultArea.append(data);
+                    groupElem.find('li.expandable').bind('click', expand);
+                }
+            });
+        }
+        $(function() {
+            $('li.expandable').bind('click', expand);
+        });
+    </script>
+    <style>
+        .clickable {
+            cursor: pointer;
+        }
+        .clickable:hover {
+            text-decoration: underline;
+        }
+        .toplvl {
+            padding-left: 20px;
+        }
+        .toplvl > li {
+            line-height: 25px;
+        }
+        body, li {
+            font-family: helvetica, arial, sans-serif;
+            font-size: 14px;
+            list-style-type: none;
+            line-height: 18px;
+        }
+        li:before {
+            content: '\2022';
+            font-size: 8px;
+            padding-right: 1em;
+        }
+    </style>
+</head>
+<body>
+{% if groups %}
+    <ul class="toplvl">
+        {% for g in groups %}
+            <li id="{{ g['id'] }}_0" class="expandable">
+                <span class="clickable">{{ g['name'] }}</span>
+                <div></div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    None!
+{% endif %}
+</body>
+</html>

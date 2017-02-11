@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Mailing Group Members</title>
+    <script src="popup.js"></script>
+    <style>
+    	html {
+    		min-width:300px;
+    		min-height:300px;
+    	}
+	    body {
+	        font-family: helvetica, arial, sans-serif;
+	        font-size: 14px;
+	        list-style-type: none;
+	        line-height: 18px;
+	    }
+	    body > div {
+	    	margin-bottom: 10px;
+	    	font-weight: bold;
+	    }
+	    iframe {
+	    	width: 100%;
+	    	height: 300px;
+	    }
+    </style>
+  </head>
+  <body>
+  	<div>Groups found in this Email:</div>
+	<iframe id="target" frameborder="0"></iframe>
+  </body>
+</html>

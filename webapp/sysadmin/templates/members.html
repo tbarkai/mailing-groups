@@ -1,0 +1,12 @@
+<ul>
+{% for m in members %}
+    {% if m['type'] == 'GROUP' %}
+        <li id="{{ m['id'] }}_{{ level }}" class="expandable">
+            <span class="clickable">{{ m['name'] }} &raquo;</span>
+            <div></div>
+        </li>
+    {% else %}
+        <li>{{ m['name'] }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
